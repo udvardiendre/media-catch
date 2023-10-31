@@ -17,7 +17,7 @@ const Home = (props: Props) => {
         <Image className='absolute z-[1]' src={homepage_graph} alt="home-garph-svg" />
         <div className='max-w-5xl m-auto flex flex-col items-center pt-10'>
           <div>
-            <h1 className='font-normal text-[28px]'>Hirdess vagy vásárolj a Médiafogáson!</h1>
+            <h1 className='font-normal text-[28px] pl-2'>Hirdess vagy vásárolj a Médiafogáson!</h1>
           </div>
           <div className=' z-[2] flex gap-7 w-full h-[90px] bg-secondary-bg justify-center items-center mt-5 mb-20 rounded shadow'>
             <Link className="border-primary-orange border rounded text-medium text-primary-orange p-2 w-1/6 text-center" href="/">Hirdetésfeladás</Link>
@@ -28,13 +28,13 @@ const Home = (props: Props) => {
       </div>
       <div className='w-full bg-secondary-bg'>
         <div className='max-w-5xl m-auto'>
-          <div className='flex flex-col items-center gap-8 my-36'>
-            <div className='flex gap-5'>
+          <div className='flex flex-col items-center gap-8 my-10 min-[1025px]:my-36'>
+            <div className='flex gap-5 flex-col min-[1025px]:flex-row'>
               <Image src={lamp} alt='lamp'/>
               <Image src={headphone} alt='headphone'/>
               <Image src={guitar} alt='guitar'/>
             </div>
-            <div className='text-center'>
+            <div className='text-center '>
               <p>Felhasználói szabályzatunk 2023. 09. 07-én, Adatvédelmi tájékoztatónk pedig 2023. 09. 27-én megváltozott. Az új szabályzatokat a Felhasználói szabályzatés az Adatvédelmi szabályzat menüpontokban érheted el.</p>
             </div>
           </div>

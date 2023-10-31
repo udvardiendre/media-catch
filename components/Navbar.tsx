@@ -9,13 +9,13 @@ type Props = {}
 
 const Navbar = (props: Props) => {
   return (
-    <nav className="w-full">
+    <nav className="w-full p-2 min-[1025px]:p-0">
         <div className="flex justify-between max-w-5xl m-auto py-[16px] items-center">
             <div>
                 <Link href="/"><Image src={nav_logo} alt="media-catch-logo" /></Link>
             </div>
             <div className="flex justify-between items-center gap-5">
-                <Link href="/sign-in" className=" text-base font-medium text-secondary-blue">Regisztráció</Link>
+                <Link href="/register" className=" text-base font-medium text-secondary-blue">Regisztráció</Link>
                 <Link href="/sign-in" className=" text-base font-medium text-white bg-secondary-blue rounded-[4px] px-2 py-1">Belépés</Link>
                 <Link href="/cart"><Image src={cart_icon} alt="cart-icon" /></Link>
             </div>
