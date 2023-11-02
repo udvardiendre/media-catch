@@ -3,7 +3,8 @@ import '@/styles/globals.css'
 import React from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-
+import SessionProvider from '@/components/SessionProvider'
+import { getServerSession } from 'next-auth'
 
 
 
@@ -17,14 +18,21 @@ type Props = {
 }
 
 const RootLayout = ({children}: Props) => {
+
+
+  // const session = await getServerSession()
+
+
   return (
     <html lang="hu">
         <body>
+          <SessionProvider /*session={session}*/ >
                 <main>
                   <Navbar/>
                     {children}
                   <Footer/>
                 </main>
+          </SessionProvider>
         </body>
     </html>
   )

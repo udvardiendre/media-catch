@@ -20,7 +20,7 @@ const Home = (props: Props) => {
             <h1 className='font-normal text-[28px] pl-2'>Hirdess vagy vásárolj a Médiafogáson!</h1>
           </div>
           <div className=' z-[2] flex gap-7 w-full h-[90px] bg-secondary-bg justify-center items-center mt-5 mb-20 rounded shadow'>
-            <Link className="border-primary-orange border rounded text-medium text-primary-orange p-2 w-1/6 text-center" href="/">Hirdetésfeladás</Link>
+            <Link className="border-primary-orange border rounded text-medium text-primary-orange p-2 w-1/6 text-center" href="/upload-product">Hirdetésfeladás</Link>
             <div>|</div>
             <input className='pl-[10px] h-[42px] border border-black rounded w-4/6' type="text" placeholder='Mit keresel?'/>
           </div>
