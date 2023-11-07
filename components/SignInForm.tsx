@@ -55,7 +55,7 @@ const SignInForm = (props: Props) => {
 
 
   return (
-    <div className='min-[500px]:min-w-[500px] max-[500px]:w-full flex flex-col justify-center bg-secondary-bg my-28 h-[431px] p-4'>
+    <div className='min-[500px]:min-w-[500px] max-[500px]:w-full flex flex-col justify-center bg-secondary-bg md:my-40 my-28 h-[431px] p-4'>
         <div className='flex items-center h-[50px]'>
             <Link className='text-center text-secondary-blue font-medium border-b-[2px] border-secondary-blue p-2 w-1/2 shadow-md' href="/sign-in">Belépés</Link>
             <Link className='text-center text-secondary-grey font-medium border-b-[2px] border-primary-grey p-2 w-1/2' href="/register">Regisztráció</Link>
