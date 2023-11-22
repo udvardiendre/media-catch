@@ -7,7 +7,7 @@ import React from 'react'
 
 type Props = {
   children: React.ReactNode,
-  session: Session
+  session: Session | null
 }
 
 const Provider = ({session,children}: Props) => {

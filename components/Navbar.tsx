@@ -21,7 +21,7 @@ const Navbar = (props: Props) => {
     <nav className="w-full p-2 min-[1025px]:p-0">
         <div className="flex justify-between max-w-5xl m-auto py-[16px] items-center">
             <div className="mr-2">
-                <Link  href="/"><Image src={nav_logo} alt="media-catch-logo" /></Link>
+                <Link  href="/"><Image src={nav_logo} alt="media-catch-logo" priority/></Link>
             </div>
             { session ? 
               (<div className="flex justify-between items-center gap-5">
