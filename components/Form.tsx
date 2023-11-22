@@ -12,7 +12,7 @@ import PhotoCard from './PhotoCard'
 type Props = {}
 
 const Form = (props: Props) => {
-  const formRef = useRef()
+  const formRef = useRef<HTMLFormElement>(null)
 
   const [brand, setBrand] = useState("")
   const [name, setName] = useState("")
@@ -27,30 +27,53 @@ const Form = (props: Props) => {
     const inputFiles = e.target.files
 
     const newFiles = [...inputFiles].filter(file => {
-      if(file.size < 1024*1024 && file.type.startsWith('image/')){
+      if(file.size <= 1024*1024 && file.type.startsWith('image/')){
         return file
       }else{
-        setError("Túl nagy fájlméret vagy nem képet próbál feltölteni!")
+        setError("Túl nagy fájlméret vagy nem képet próbál feltölteni! (Maximum feltölthető fileméret 1 MB!)")
         return
       }
     })
     
     setFiles(prev => [...newFiles, ...prev] as never[])
-    console.log(files)
+    
+    if(formRef.current !== null){
+      formRef.current.reset()
+    } 
+    
   }
 
-  const handleDelete = async (e: any) => {
+  const handleDeleteFile = async (index: number) => {
+    const newFiles = files.filter((_,i) => i !== index)
+    setFiles(newFiles)
+  }
+
+  const handleCloudinaryUpload = async () => {
+    if (!files.length) {
+      setError("Legalább 1 fénykép feltöltése kötelező!")
+    }else if (files.length > 6){
+      setError("Maximum 6db fénykép feltöltése lehetsges!")
+    }
+
+    const formData = new FormData()
+
+    files.forEach(file => {
+      formData.append('files', file)
+    })
+
+    const res = await uploadPhoto(formData)
+
 
   }
   
-  const handleSubmit = (e: any) => {
-    
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
   }
 
 
   return (
     <div className='bg-secondary-bg max-w-[702px] min-[702px]:w-[702px] flex my-10 p-10 rounded shadow-md w-full flex-col justify-center'>
-        <form className='flex flex-col justify-center gap-8'>
+        <form className='flex flex-col justify-center gap-8' ref={formRef}>
             <h1 className='text-base font-medium'>Add meg a termék adatait!</h1>
             <input className='border border-tertiary-grey rounded text-base h-[40px] w-full pl-2' placeholder="Márka" type="text" />
             <input className='border border-tertiary-grey rounded text-base h-[40px] w-full pl-2' placeholder="Termék név" type="text" />
@@ -60,7 +83,7 @@ const Form = (props: Props) => {
         </form>
         <div className='flex mb-10 gap-3 flex-wrap justify-center'>
         {files && files.map((file, index) => (
-          <PhotoCard key={index} url={URL.createObjectURL(file)} handleDelete={handleDelete} />
+          <PhotoCard key={index} url={URL.createObjectURL(file)} handleDeleteFile={() => handleDeleteFile(index)} />
         ))}
         </div>
         {error && 
@@ -69,7 +92,7 @@ const Form = (props: Props) => {
           </div>
         }
         <div className='flex w-full gap-2 flex-col min-[702px]:flex-row items-center' >
-            <button className=" w-1/2 text-base font-medium text-white bg-primary-orange rounded-[4px] px-2 py-1">Feltöltés</button>
+            <button onClick={handleSubmit} className=" w-1/2 text-base font-medium text-white bg-primary-orange rounded-[4px] px-2 py-1">Feltöltés</button>
             <Link className=" w-1/2 text-base font-medium text-white bg-secondary-grey rounded-[4px] px-2 py-1 text-center" href="/profile">Vissza</Link>
         </div>
     </div>
