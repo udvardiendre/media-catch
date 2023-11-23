@@ -99,7 +99,7 @@ const Form = (props: Props) => {
 
     try {
       if(session?.user !== undefined){
-        const res = await fetch("api/uploadProduct", {
+        const res = await fetch("api/product/new", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
