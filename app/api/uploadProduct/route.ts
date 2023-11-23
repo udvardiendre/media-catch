@@ -4,11 +4,11 @@ import Product from "@/models/product";
 export const POST = async (req: any) => {
     
     try {
-        const {brand, name, price, description, photos} = await req.json()
-        console.log(brand, name, price, description, photos)
+        const {userId, brand, name, price, description, photos} = await req.json()
+        console.log(userId, brand, name, price, description, photos)
         await connectToDB()
 
-        Product.create({brand, name, price, description, photos})
+        Product.create({creator: userId, brand, name, price, description, photos})
 
 
 

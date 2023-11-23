@@ -5,7 +5,7 @@ import React from 'react'
 import {useState, useRef} from 'react'
 import PhotoCard from './PhotoCard'
 import { useRouter } from "next/navigation"
-
+import { useSession } from 'next-auth/react'
 
 
 
@@ -23,6 +23,7 @@ const Form = (props: Props) => {
 
   const [error, setError] = useState("")
   const router = useRouter()
+  const {data: session} = useSession()
 
   const handleInputFiles = async (e: any) => {
     const inputFiles = e.target.files
@@ -97,12 +98,14 @@ const Form = (props: Props) => {
     }
 
     try {
+      if(session?.user !== undefined){
         const res = await fetch("api/uploadProduct", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                userId: session?.user.id,
                 brand,
                 name,
                 price,
@@ -110,6 +113,7 @@ const Form = (props: Props) => {
                 photos
             })
         })
+      
 
         if(res.ok && formRef.current !== null){
             formRef.current.reset()
@@ -117,6 +121,7 @@ const Form = (props: Props) => {
         }else {
             console.log("Hiba a termék feltöltése során!")
         }
+      }
     } catch (error) {
         console.log("Hiba a termék feltöltése során!", error)
     }

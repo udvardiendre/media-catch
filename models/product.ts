@@ -1,6 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
 const ProductSchema = new Schema({
+    creator: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
     brand: {
         type: String,
         required: [true, "Brand is required!"]
