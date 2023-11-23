@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
+        sourceSansPro: ['Source Sans Pro','sans-serif']
       },
       colors: {
         'primary-orange': '#F07330',
