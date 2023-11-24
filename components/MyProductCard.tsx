@@ -13,7 +13,6 @@ type Props = {
 
 const MyProductCard = ({brand, name, price, description, images}: Props) => {
 
-
     console.log(images)
   return (
     <div className='bg-secondary-bg max-w-[650px] min-[702px]:w-[702px] w-full flex mt-5 p-5 flex-col gap-5 items-center rounded shadow-md'>
