@@ -5,13 +5,15 @@ import ProfileCard from "@/components/ProfileCard"
 import MyProductsList from "@/components/MyProductsList"
 import Link from "next/link"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+
 
 
 type Props = {}
 
 const Profile = (props: Props) => {
   const {data: session} = useSession()
-  
+  const router = useRouter()
   const [products, setProducts] = useState([])
 
   
@@ -28,12 +30,20 @@ const Profile = (props: Props) => {
 
   },[session?.user.id])
 
+  const handleEdit = (product: any) => {
+    router.push(`/update-product?id=${product._id}`)
+  }
+
+  const handleDelete = () => {
+
+  }
+
   console.log(products)
 
   return (
     <section className="bg-primary-bg flex flex-col items-center justify-center ">
         <ProfileCard/>
-        <MyProductsList products={products}/>
+        <MyProductsList products={products} handleEdit={handleEdit} handleDelete={handleDelete} />
         <div className='bg-secondary-bg max-w-[702px] min-[702px]:w-[702px] flex mt-5 mb-10 p-5 flex-col gap-4 rounded shadow-md  w-full'>
           <h1 className="font-medium">Tölts fel egy új terméket</h1>
           <div className='flex justify-center w-full gap-2' >
