@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react'
 
 type Props = {}
 
-const Form = (props: Props) => {
+const UpdateForm = (props: Props) => {
   const formRef = useRef<HTMLFormElement>(null)
 
   const [brand, setBrand] = useState("")
@@ -156,4 +156,4 @@ const Form = (props: Props) => {
   )
 }
 
-export default Form
+export default UpdateForm
