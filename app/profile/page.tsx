@@ -30,12 +30,25 @@ const Profile = (props: Props) => {
 
   },[session?.user.id])
 
-  const handleEdit = (product: any) => {
-    router.push(`/update-product?id=${product._id}`)
+  const handleEdit = (productId: any) => {
+    router.push(`/update-product?id=${productId}`)
   }
 
-  const handleDelete = () => {
+  const handleDelete = async (productId: any) => {
+    const hasConfirmed = confirm("Biztosan törlöd a terméket?")
 
+    if(hasConfirmed){
+      try {
+        await fetch(`/api/product/${productId.toString()}`,{method: 'DELETE'})
+  
+        const filteredProducts = products.filter((p: any) => p._id !== productId)
+
+        setProducts(filteredProducts)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
   }
 
   console.log(products)

@@ -136,7 +136,8 @@ const UploadForm = (props: Props) => {
             <input onChange={(e) => setName(e.target.value)} className='border border-tertiary-grey rounded text-base h-[40px] w-full pl-2' placeholder="Termék név" type="text" />
             <input onChange={(e) => setPrice(e.target.value)} className='border border-tertiary-grey rounded text-base h-[40px] w-full pl-2' placeholder="Ár" type="number" />
             <textarea onChange={(e) => setDescription(e.target.value)} className='border border-tertiary-grey rounded text-base h-[140px] w-full pl-2 pt-2' placeholder="Termék leírás" ></textarea>
-            <input onChange={handleInputFiles} className="mb-10" type="file" accept="image/* " multiple />
+            <label htmlFor="img" className=' w-[200px] text-base text-center font-medium text-primary-orange  border border-primary-orange hover:text-white hover:bg-primary-orange rounded-[4px] px-2 py-1 mb-4'>Kép feltöltése</label>
+            <input id="img" onChange={handleInputFiles} className="mb-10 hidden" type="file" accept="image/* " multiple />
         </form>
         <div className='flex mb-10 gap-3 flex-wrap justify-center'>
         {files && files.map((file, index) => (

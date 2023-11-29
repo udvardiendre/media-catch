@@ -54,14 +54,14 @@ export const PATCH = async (req: any, { params }: { params: { id: string } }) =>
 export const DELETE = async (req: any, { params }: { params: { id: string } }) => {
 
     try {
-        
+        console.log(params.id)
         await connectToDB()
 
-        await Product.findByIdAndRemove(params.id)
+        await Product.findByIdAndDelete(params.id)
 
         return new Response("Product deleted successfully",{status: 200})
         
     } catch (error) {
-        return new Response("Failed to update speific product",{status: 500})
+        return new Response("Failed to delete speific product",{status: 500})
     }
 }

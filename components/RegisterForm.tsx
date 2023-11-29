@@ -86,7 +86,7 @@ const RegisterForm = (props: Props) => {
     }
 
     return (
-        <div className='max-w-[500px] flex flex-col justify-center bg-secondary-bg my-10 md:my-28  h-[592px] p-4'>
+        <div className='max-w-[500px] flex flex-col justify-center bg-secondary-bg my-10 md:my-28  min-h-[592px] p-4'>
             <div className='flex items-center h-[50px]'>
                 <Link className='text-center text-secondary-grey font-medium border-b-[2px] border-primary-grey p-2 w-1/2' href="/sign-in">Belépés</Link>
                 <Link className='text-center text-secondary-blue font-medium border-b-[2px] border-secondary-blue p-2 w-1/2 shadow-md' href="/register">Regisztráció</Link>
