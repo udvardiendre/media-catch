@@ -1,12 +1,15 @@
 "use client"
 
+import google_icon from "@/public/assets/icons/google_icon.png"
 
 
-import SignIn from "@/app/sign-in/page"
 import Link from "next/link"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import {useRouter} from "next/navigation"
+import Image from "next/image"
+
+
 
 
 
@@ -65,8 +68,8 @@ const SignInForm = (props: Props) => {
             <input onChange={(e) => setEmail(e.target.value)} className='border border-tertiary-grey rounded text-base h-[40px] w-full pl-2' placeholder='Email cím' required type="email" />
             <input onChange={(e) => setPassword(e.target.value)} className='border border-tertiary-grey rounded text-base h-[40px] w-full pl-2' placeholder='Jelszó' required type="password" />
             <div className="flex w-full items-baseline justify-between mt-10">
-              <Link  className="text-secondary-blue" href="/sign-in">Elfelejtett jelszó</Link>
-              <button className="h-[40px] w-1/5 bg-primary-orange rounded text-center text-white mb-8">Belépés</button>
+              <Link  className="font-medium text-secondary-blue" href="/sign-in">Elfelejtett jelszó</Link>
+              <button className="h-[40px] w-1/5 bg-primary-orange rounded font-medium text-center text-white mb-8">Belépés</button>
             </div>
             {error && 
                     <div>
@@ -74,7 +77,10 @@ const SignInForm = (props: Props) => {
                     </div>
                 }
         </form>
-        <button onClick={handleGoogleSignIn} className="h-[40px] w-full bg-white rounded text-center text-secondary-grey border-tertiary-grey border">Folytatás Google fiókkal</button>
+        <button onClick={handleGoogleSignIn} className="h-[40px] w-full bg-white rounded font-medium text-center text-secondary-grey border-tertiary-grey border flex justify-center items-center gap-2">
+          <Image className="h-[25px] w-[25px]" src={google_icon} alt="google_icon" />
+          <p>Folytatás Google fiókkal</p>
+        </button>
     </div>
   )
 }

@@ -54,7 +54,7 @@ const Profile = (props: Props) => {
   console.log(products)
 
   return (
-    <section className="bg-primary-bg flex flex-col items-center justify-center ">
+    <section className="bg-primary-bg flex flex-col items-center justify-center min-h-[70vh]">
         <ProfileCard/>
         <MyProductsList products={products} handleEdit={handleEdit} handleDelete={handleDelete} />
         <div className='bg-secondary-bg max-w-[702px] min-[702px]:w-[702px] flex mt-5 mb-10 p-5 flex-col gap-4 rounded shadow-md  w-full'>

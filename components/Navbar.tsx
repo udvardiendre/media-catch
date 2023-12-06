@@ -5,6 +5,7 @@ import cart_icon from "@/public/assets/icons/cart_icon.png";
 import cart_icon_white from "@/public/assets/icons/cart_icon_white.png";
 import hamburger_icon from "@/public/assets/icons/hamburger_icon.png";
 import close_icon from "@/public/assets/icons/close_icon.png";
+import magnifier_grey_icon from "@/public/assets/icons/magnifier_grey_icon.png"
 
 import Image from "next/image";
 import Link from "next/link";
@@ -34,12 +35,16 @@ const Navbar = (props: Props) => {
             <></>
           ) : (
             <div className="w-4/6 mr-5 ml-3">
+              <form className="relative" >
               <input
                 className="border border-secondary-grey rounded-full h-[40px] w-full pl-3"
                 type="text"
                 placeholder="Mit keresel?"
               />
+              <button className='w-[20px] h-[20px] absolute right-3 top-[10px]'><Image src={magnifier_grey_icon} alt="grey_magnifier" /></button>
+              </form>
             </div>
+            
           )}
           {session ? (
             <div className="flex justify-between items-center gap-5 ml-2">
@@ -92,16 +97,20 @@ const Navbar = (props: Props) => {
             />
           </button>
           {toggleDropdown && (
-            <div className="z-[3] fixed top-[-20px] right-0 mt-4 rounded-md w-1/2 h-full bg-primary-blue">
+            <div>
+            <div className="z-[4] fixed top-[-15px] right-0 mt-4  w-1/2 h-full bg-primary-blue">
                 <ul className="flex flex-col gap-4 p-5 items-stat">
                 <button className="flex justify-end"><Image width={30} height={30} src={close_icon} alt="close_icon" onClick={() => setToggleDropdown(false)}/></button>
                 <li>
                     <div className="w-full mr-5">
+                      <form className="relative">
                         <input
                             className="border border-secondary-grey rounded-full h-[40px] w-full pl-3"
                             type="text"
                             placeholder="Mit keresel?"
                           />
+                          <button className='w-[20px] h-[20px] absolute right-3 top-[10px]'><Image src={magnifier_grey_icon} alt="grey_magnifier"/></button>
+                        </form>
                     </div>
                 </li>
               {session ? (
@@ -129,7 +138,7 @@ const Navbar = (props: Props) => {
                     </li>
                 </div>
               ) : (
-                <div>
+                <div className="flex flex-col gap-4">
                     <li>
                       <Link className="text-white text-base font-medium" href="/register" onClick={() => setToggleDropdown(false)}>Regisztráció</Link>
                     </li>
@@ -146,6 +155,9 @@ const Navbar = (props: Props) => {
               )}
               </ul>
             </div>
+            <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-[3]" >
+            </div>
+          </div>
           )}
         </div>
       </div>
