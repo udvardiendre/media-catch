@@ -23,26 +23,36 @@ const Search = (props: Props) => {
     setAllProducts(data);
   };
 
-  const filterProducts = (searchText: string) => {
-    const regex = new RegExp(searchText, "i"); // 'i' flag for case-insensitive search
-    return allProducts.filter(
-      (product: any) =>
-        regex.test(product.creator.username) ||
-        regex.test(product.brand) ||
-        regex.test(product.name) ||
-        regex.test(product.description)
-    );
-  };
-
   useEffect(() => {
     fetchProducts();
-    
-  }, []);
+  },[])
   
-  setSearchedResults(filterProducts(queryString as string))
+  useEffect(() => {
+    
+    const filterProducts = (searchText: string) => {
+      const regex = new RegExp(searchText, "i"); 
+      return allProducts.filter(
+        (product: any) =>
+          regex.test(product.creator.username) ||
+          regex.test(product.brand) ||
+          regex.test(product.name) ||
+          regex.test(product.description)
+      );
+    }
+
+    const handleSearch = () => {
+      setSearchedResults(filterProducts(queryString as string))
+    }
+    
+    handleSearch()
+  }, [queryString, allProducts]);
+
+  console.log(searchedResults)
   return (
     <section>
-      <h1>Nacsá</h1>
+      <h1>    
+        Nacsá
+      </h1>
     </section>
   )
 }
