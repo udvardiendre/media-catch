@@ -54,15 +54,15 @@ const Home = (props: Props) => {
         <div className='max-w-5xl m-auto'>
           <div className='flex flex-col items-center gap-8 my-10 min-[1025px]:my-36'>
             <div className='flex gap-5 flex-col min-[1025px]:flex-row text-white text-[24px] text-center'>
-              <button onClick={() => handleSubmit("lámpa")} className='relative'>
+              <button onClick={() => router.push("/search?q=$lámpa")} className='relative'>
                 <Image src={lamp} alt='lamp'/>
                 <p className='absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2'>Állólámpák</p>
               </button>
-              <button onClick={() => handleSubmit("fejhallgató")} className='relative'>
+              <button onClick={() => router.push("/search?q=$fejhallgató")} className='relative'>
                 <Image src={headphone} alt='headphone'/>
                 <p className='absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2'>Fejhallgatók</p>
               </button>
-              <button onClick={() => handleSubmit("hangszerek")} className='relative'>
+              <button onClick={() => router.push("/search?q=$hangszer")} className='relative'>
                 <Image src={guitar} alt='guitar'/>
                 <p className='absolute left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2' >Hangszerek</p>
               </button>

@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useRouter } from 'next/navigation'
 
 type Props = {};
 
@@ -21,8 +22,20 @@ const Navbar = (props: Props) => {
   const pathname = usePathname();
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
+  const router = useRouter()
+  const [searchParam, setSearchParam] = useState("")
+
+  const handleSubmit = (e: any)=> {
+    if(toggleDropdown){
+      setToggleDropdown(!toggleDropdown)
+    }
+    e.preventDefault()
+    console.log(searchParam)
+    router.push(`/search?q=${searchParam}`)
+  }
+
   return (
-    <nav className="w-full p-2 min-[1025px]:p-0">
+    <nav className="w-full p-2 min-[1025px]:p-0 shadow-md">
       <div className="flex justify-between max-w-5xl m-auto py-[16px] items-center">
         <div className="mr-2">
           <Link href="/">
@@ -35,13 +48,14 @@ const Navbar = (props: Props) => {
             <></>
           ) : (
             <div className="w-4/6 mr-5 ml-3">
-              <form className="relative" >
+              <form onSubmit={handleSubmit} className="relative" >
               <input
+                onChange={(e) => setSearchParam(e.target.value)}
                 className="border border-secondary-grey rounded-full h-[40px] w-full pl-3"
                 type="text"
                 placeholder="Mit keresel?"
               />
-              <button className='w-[20px] h-[20px] absolute right-3 top-[10px]'><Image src={magnifier_grey_icon} alt="grey_magnifier" /></button>
+              <button type="submit" className='w-[20px] h-[20px] absolute right-3 top-[10px]'><Image src={magnifier_grey_icon} alt="grey_magnifier" /></button>
               </form>
             </div>
             
@@ -103,13 +117,14 @@ const Navbar = (props: Props) => {
                 <button className="flex justify-end"><Image width={30} height={30} src={close_icon} alt="close_icon" onClick={() => setToggleDropdown(false)}/></button>
                 <li>
                     <div className="w-full mr-5">
-                      <form className="relative">
+                      <form onSubmit={handleSubmit} className="relative">
                         <input
+                            onChange={(e) => setSearchParam(e.target.value)}
                             className="border border-secondary-grey rounded-full h-[40px] w-full pl-3"
                             type="text"
                             placeholder="Mit keresel?"
                           />
-                          <button className='w-[20px] h-[20px] absolute right-3 top-[10px]'><Image src={magnifier_grey_icon} alt="grey_magnifier"/></button>
+                          <button type="submit" className='w-[20px] h-[20px] absolute right-3 top-[10px]'><Image src={magnifier_grey_icon} alt="grey_magnifier"/></button>
                         </form>
                     </div>
                 </li>
