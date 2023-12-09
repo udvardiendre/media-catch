@@ -15,28 +15,32 @@ type Props = {
     price: string
     description: string
     images: string[]
+    similarProducts: any[]
 }
 
-const ProductCard = ({id, brand, name, price, description, images}: Props) => {
+const ProductCard = ({id, brand, name, price, description, images, similarProducts}: Props) => {
 
 
   const pathName = usePathname()
   const router = useRouter()
 
   const goToDetails = () => {
-    router.push(`/show-product?id=${id}`)
+    const serializedProducts = JSON.stringify(similarProducts);
+    router.push(`/show-product?id=${id}&similar=${encodeURIComponent(serializedProducts)}`)
   }
 
 
   return (
     <div className='flex gap-5 max-[702px]:flex-col w-full justify-between'>
-            <Image  className="object-contain self-start" width={240} height={148} src={images[0]} alt="product-picture"/>
-            <div className='flex flex-col gap-2'>
-                <h1 className="font-medium text-xl">{brand}</h1>
-                <h1 className='font-normal font-sourceSansPro text-[20px] border-b-2 border-terinary-grey'>{name}</h1>
-                <p className='text-secondary-grey text-[14px]'>Leírás</p>
-                <p className='font-sourceSansPro text-[14px]'>{description}</p>
-                {pathName !== '/search' && <h1 className='font-sourceSansPro text-[25px]'>{`${price} Ft`}</h1>}
+            <div className='flex gap-2 max-[550px]:flex-col max-[550px]:items-center'>
+              <Image  className="object-cover min-[551px]:object-contain self-start" width={240} height={148} src={images[0]} alt="product-picture"/>
+              <div className='flex flex-col gap-2 min-[551px]:w-[50%] w-full' >
+                  <h1 className="font-medium text-xl">{brand}</h1>
+                  <h1 className='font-normal font-sourceSansPro text-[20px] border-b-2 border-terinary-grey'>{name}</h1>
+                  <p className='text-secondary-grey text-[14px]'>Leírás</p>
+                  <p className='font-sourceSansPro text-[14px]'>{description}</p>
+                  {pathName !== '/search' && <h1 className='font-sourceSansPro text-[25px]'>{`${price} Ft`}</h1>}
+              </div>
             </div>
             {pathName === "/search" && 
               <div className='bg-primary-grey min-w-[235px] h-[154px] p-4 flex flex-col gap-2'>
