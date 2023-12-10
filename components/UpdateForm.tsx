@@ -70,17 +70,22 @@ const UpdateForm = (props: Props) => {
 
   const handleCloudinaryUpload = async () => {
     if (!files.length) {
-      setError("Legalább 1 fénykép feltöltése kötelező!")
-    }else if (files.length > 6){
-      setError("Maximum 6db fénykép feltöltése lehetsges!")
+      setError("Legalább 1 fénykép feltöltése kötelező!");
+      return;
+    } else if (files.length > 6) {
+      setError("Maximum 6db fénykép feltöltése lehetséges!");
+      return;
     }
-
-    const formData = new FormData()
-
-    files.forEach(file => {
-      formData.append('files', file)
-    })
-
+  
+    const formData = new FormData();
+  
+    files.forEach((file: any) => {
+      if(file && typeof file !== "string"){
+        console.log(file.type)
+        formData.append("files", file);
+        
+      }
+    });
     console.log(formData.getAll('files'))
     
     try {
@@ -102,13 +107,24 @@ const UpdateForm = (props: Props) => {
     } catch (error) {
       return error
     }
-
-  }
+  };
   
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     
-    const photos = await handleCloudinaryUpload()
+    const photos: string[] = await handleCloudinaryUpload() as string[]
+
+    if(photos){
+      photos.forEach((photo : any) => {
+        files.push(photo as never)
+      })
+      files.forEach((file: any, index) => {
+        if(typeof file !== "string"){
+          files.splice(index,1)
+        }
+      })
+    }
+    console.log(files)
 
     if(!brand || !name || !price || !description || !files){
         setError("Töltsd ki a kötelező mezőket!")
@@ -117,8 +133,15 @@ const UpdateForm = (props: Props) => {
 
     try {
       if(session?.user !== undefined){
-        const res = await fetch("api/product/new", {
-            method: "POST",
+
+        console.log(brand)
+        console.log(name)
+        console.log(price)
+        console.log(description)
+        console.log(files)
+
+        const res = await fetch(`api/product/${productId}`, {
+            method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -128,7 +151,7 @@ const UpdateForm = (props: Props) => {
                 name,
                 price,
                 description,
-                photos
+                photos: files
             })
         })
       
@@ -138,6 +161,7 @@ const UpdateForm = (props: Props) => {
             router.push("/profile")
         }else {
             console.log("Hiba a termék feltöltése során!")
+            console.log(res)
         }
       }
     } catch (error) {
@@ -145,7 +169,7 @@ const UpdateForm = (props: Props) => {
     }
 }
   
-  console.log(files)
+  
   return (
     <div className='bg-secondary-bg max-w-[702px] min-[702px]:w-[702px] flex my-10 p-10 rounded shadow-md w-full flex-col justify-center'>
         <form className='flex flex-col justify-center gap-8' ref={formRef}>

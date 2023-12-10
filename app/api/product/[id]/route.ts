@@ -46,7 +46,8 @@ export const PATCH = async (req: any, { params }: { params: { id: string } }) =>
             return new Response(JSON.stringify(existingProduct),{status: 200})
         }
     } catch (error) {
-        return new Response("Failed to update speific product",{status: 500})
+        console.log(`Failed to update speific product: ${error}`)
+        return new Response(`Failed to update speific product: ${error}`,{status: 500})
     }
 }
 

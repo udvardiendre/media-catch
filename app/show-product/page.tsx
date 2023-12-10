@@ -62,7 +62,10 @@ const [product, setProduct] = useState<{[key: string]: any}>({})
         <p className='text-[20px]'>Ár: <span className='font-bold text-[28px]'>{`${product.price}`}</span> Ft</p>
         <p className='font-bold text-[24px]'>{product.brand}</p>
         <p className='text-[18px]'>{product.name}</p>
-        <p className='font-bold text-[17px]'>Leírás</p>
+        <div className='flex items-center relative -left-5 gap-4'>
+          <div className='h-[18.7px] w-[5px] bg-primary-orange'></div>
+          <p className='font-bold text-[17px]'>Leírás</p>
+        </div>
         <p className='text-[14px]'>{product.description}</p>
         <p className='font-bold text-[14px]'>{`Feladás dátuma: ${product.createdAt}`}</p>
         <button className='w-[132px] h-[39px] bg-primary-orange text-white font-bold text-[12px] rounded-md' >Kosárba teszem</button>
