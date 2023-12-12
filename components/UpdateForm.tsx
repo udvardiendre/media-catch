@@ -72,8 +72,8 @@ const UpdateForm = (props: Props) => {
     if (!files.length) {
       setError("Legalább 1 fénykép feltöltése kötelező!");
       return;
-    } else if (files.length > 6) {
-      setError("Maximum 6db fénykép feltöltése lehetséges!");
+    } else if (files.length > 8) {
+      setError("Maximum 8db fénykép feltöltése lehetséges!");
       return;
     }
   

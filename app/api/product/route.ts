@@ -1,11 +1,11 @@
-import Prompt from "@/models/product";
+import Product from "@/models/product";
 import { connectToDB } from "@/utils/database";
 
 export const GET = async (req: any) => {
     try {
         await connectToDB()
 
-        const products = await Prompt.find({}).populate('creator')
+        const products = await Product.find({}).populate('creator')
 
         return new Response(JSON.stringify(products), { status: 200 })
     } catch (error) {

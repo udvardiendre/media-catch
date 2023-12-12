@@ -3,7 +3,6 @@
 import { Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 
-import React from 'react'
 
 type Props = {
   children: React.ReactNode,
@@ -11,8 +10,11 @@ type Props = {
 }
 
 const Provider = ({session,children}: Props) => {
+  
   return (
-    <SessionProvider session={session}>{children}</SessionProvider>
+    <SessionProvider session={session}>
+      {children}
+    </SessionProvider>
   )
 }
 
