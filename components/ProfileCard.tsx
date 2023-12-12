@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { signOut } from 'next-auth/react'
+import { useShoppingCart } from '@/context/ShoppingCartContext';
 
 
 type Props = {}
@@ -13,6 +14,12 @@ type Props = {}
 const ProfileCard = (props: Props) => {
 
   const {data: session} = useSession()
+  const { cartItems, setCartItems } = useShoppingCart();
+
+  const handleLogOut = async () => {
+    setCartItems([]);
+    await signOut();
+  };
 
   return (
     <div className='bg-secondary-bg max-w-[702px] min-[702px]:w-[702px] flex mt-10 p-10 rounded shadow-md  w-full'>
@@ -29,7 +36,7 @@ const ProfileCard = (props: Props) => {
             </div>
             <div className='flex flex-col gap-2'>
               <Link href="/" className="text-center text-base font-medium text-white bg-primary-orange rounded-[4px] px-2 py-1">Adatok módosítása</Link>
-              <button onClick={() => signOut()} className=" text-base font-medium text-white bg-secondary-blue rounded-[4px] px-2 py-1">Kijelentkezés</button>
+              <button onClick={() => handleLogOut()} className=" text-base font-medium text-white bg-secondary-blue rounded-[4px] px-2 py-1">Kijelentkezés</button>
             </div>
           </div>
         </div>

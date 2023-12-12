@@ -2,7 +2,7 @@
 
 import React from "react";
 import ProductCard from "./ProductCard";
-import { useShoppingCart } from "@/context/ShoppingCartContext";
+
 
 import { useEffect, useState } from "react";
 
@@ -14,8 +14,6 @@ type Props = {
 const CartItem = ({id, quantity}: Props) => {
 
   const [product, setProduct] = useState<any>();
-  
-
   
 
   useEffect(() => {

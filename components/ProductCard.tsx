@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
@@ -8,6 +8,8 @@ import info_icon from "@/public/assets/icons/info_icon.png"
 import cart_icon_trans_white from "@/public/assets/icons/cart_icon_trans_white.png"
 import { useRouter } from 'next/navigation'
 import { useShoppingCart } from '@/context/ShoppingCartContext'
+import { useSession } from 'next-auth/react'
+
 
 
 
@@ -23,12 +25,19 @@ type Props = {
 
 const ProductCard = ({id, brand, name, price, description, images, similarProducts}: Props) => {
 
+  const { data: session } = useSession();
+
   const {getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart} = useShoppingCart()
   const quantity = getItemQuantity(id as string)
-
+  
+  const {cartItems} = useShoppingCart()
+  console.log(cartItems)
+  
 
   const pathName = usePathname()
   const router = useRouter()
+
+
 
   const goToDetails = () => {
     const serializedProducts = JSON.stringify(similarProducts);
@@ -36,8 +45,9 @@ const ProductCard = ({id, brand, name, price, description, images, similarProduc
   }
 
 
+
   return (
-    <div>
+    <div className='w-full'>
       <div className='flex gap-5 max-[702px]:flex-col w-full justify-between'>
             <div className='flex gap-2 max-[550px]:flex-col max-[550px]:items-center'>
               <Image  className="object-cover min-[551px]:object-contain self-start" width={240} height={148} src={images[0]} alt="product-picture"/>
@@ -57,7 +67,7 @@ const ProductCard = ({id, brand, name, price, description, images, similarProduc
                   <Link href="/"><Image className="h-[15px] w-[15px]"  src={info_icon} alt="info_icon"/></Link>
                 </div>
                 {quantity === 0 ? (
-                <button onClick={() => increaseCartQuantity(id as string)} className='bg-primary-green rounded-sm flex justify-center items-center gap-2 h-[35px]'>
+                <button onClick={() => session ? (increaseCartQuantity(id as string)) : (router.push("/sign-in")) } className='bg-primary-green rounded-sm flex justify-center items-center gap-2 h-[35px]'>
                   <Image className="h-[18px] w-[18px]" src={cart_icon_trans_white} alt="cart_icon_trans_white"/>
                   <p className='font-sourceSansPro text-[18px] text-white'>Kosárba</p>
                 </button>) : (

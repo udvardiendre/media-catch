@@ -14,7 +14,7 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
-
+import { useShoppingCart } from "@/context/ShoppingCartContext";
 type Props = {};
 
 const Navbar = (props: Props) => {
@@ -25,6 +25,8 @@ const Navbar = (props: Props) => {
   const router = useRouter()
   const [searchParam, setSearchParam] = useState("")
 
+  const { cartItems, setCartItems } = useShoppingCart();
+
   const handleSubmit = (e: any)=> {
     if(toggleDropdown){
       setToggleDropdown(!toggleDropdown)
@@ -33,6 +35,13 @@ const Navbar = (props: Props) => {
     console.log(searchParam)
     router.push(`/search?q=${searchParam}`)
   }
+
+  
+
+  const handleLogOut = async () => {
+    setCartItems([]);
+    await signOut();
+  };
 
   return (
     <nav className="w-full p-2 min-[1025px]:p-0 shadow-md">
@@ -72,7 +81,7 @@ const Navbar = (props: Props) => {
                 />
               </Link>
               <button
-                onClick={() => signOut()}
+                onClick={() => handleLogOut()}
                 className=" text-base font-medium text-white bg-secondary-blue rounded-[4px] px-2 py-1"
               >
                 Kijelentkezés
